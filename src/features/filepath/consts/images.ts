@@ -1,4 +1,13 @@
-const JpegExtensions = ['jpg', 'jpeg', 'JPG', 'JPEG', 'jpe', 'jfif', 'pjpeg', 'pjp'];
+const JpegExtensions = [
+  'jpg',
+  'jpeg',
+  'JPG',
+  'JPEG',
+  'jpe',
+  'jfif',
+  'pjpeg',
+  'pjp',
+];
 
 const PngExtensions = ['png', 'PNG'];
 
