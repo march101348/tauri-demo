@@ -57,7 +57,9 @@ export const Tabs: FC<Props> = ({
           ? children.map((child) => (
               <div
                 key={child.key}
-                className={`w-full h-full${child.key === viewing ? '' : ' hidden'}`}
+                className={`w-full h-full${
+                  child.key === viewing ? '' : ' hidden'
+                }`}
               >
                 {child}
               </div>
