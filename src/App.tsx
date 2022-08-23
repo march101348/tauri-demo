@@ -21,7 +21,7 @@ type TabState = {
   key: string;
   path: string;
   initFilePath?: string;
-}[]
+}[];
 
 const App = () => {
   const savePath = 'tabstate.sav';
@@ -34,10 +34,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    readTextFile(savePath, {dir: BaseDirectory.LocalData}).then((tabState) => {
-      const state = JSON.parse(tabState) as { title: string; path: string }[];
-      restoreTab(state);
-    });
+    readTextFile(savePath, { dir: BaseDirectory.LocalData }).then(
+      (tabState) => {
+        const state = JSON.parse(tabState) as { title: string; path: string }[];
+        restoreTab(state);
+      }
+    );
     getMatches().then((matches) => {
       const filepath = matches.args.filepath.value;
       typeof filepath === 'string' && createNewTab(filepath);
@@ -45,15 +47,22 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    writeTextFile(savePath, JSON.stringify(panes.map((pane) => {
-      return {
-        title: pane.title,
-        path: pane.path,
-      }})), {dir: BaseDirectory.LocalData});
+    writeTextFile(
+      savePath,
+      JSON.stringify(
+        panes.map((pane) => {
+          return {
+            title: pane.title,
+            path: pane.path,
+          };
+        })
+      ),
+      { dir: BaseDirectory.LocalData }
+    );
   }, [panes]);
 
-  const restoreTab = (dirs: { title: string; path: string; }[]) => {
-    const restored = dirs.map(({title, path}) => {
+  const restoreTab = (dirs: { title: string; path: string }[]) => {
+    const restored = dirs.map(({ title, path }) => {
       const newActiveKey = `newTab${newTabIndex.current++}`;
       return {
         title,
@@ -61,7 +70,7 @@ const App = () => {
         path,
         initFilePath: undefined,
       };
-    })
+    });
     setPanes((prevPanes) => {
       const newPanes = [...prevPanes, ...restored];
       return newPanes;
